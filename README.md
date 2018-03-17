@@ -8,6 +8,7 @@ this tool is developped to simplify the creation of levels for Metroidvania game
 
 * add title and level dimensions
 * add character, background and objects to the level
+* delete/clone a selected object
 * possibility to drag and drop objects
 * edit an existing level represented under html format
 * export a level created with this tool to html format
