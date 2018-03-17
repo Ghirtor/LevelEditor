@@ -1,6 +1,4 @@
-<snippet>
-  <content><![CDATA[
-# ${1:LevelEditor}
+# LevelEditor
 
 this tool is developped to simplify the creation of levels for Metroidvania game sources at : [Metroidvania] (https://github.com/Ghirtor/Metroidvania "Metroidvania").
 
@@ -13,7 +11,7 @@ this tool is developped to simplify the creation of levels for Metroidvania game
 * possibility to drag and drop objects
 * edit an existing level represented under html format
 * export a level created with this tool to html format
-* possibility to choose tool style in menu **settings > style > [defaultStyle] or [darkStyle]
+* possibility to choose tool style in menu **settings > style > [defaultStyle] or [darkStyle]**
 
 ## Installation
 
@@ -32,7 +30,3 @@ this tool is developped to simplify the creation of levels for Metroidvania game
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :D
-
-]]></content>
-  <tabTrigger>readme</tabTrigger>
-</snippet>
