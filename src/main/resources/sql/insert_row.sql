@@ -1,0 +1,1 @@
+insert into styleSheet values('/css/darkStyle.css');
