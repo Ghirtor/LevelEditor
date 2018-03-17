@@ -1,8 +1,8 @@
 # LevelEditor
 
-this tool is developped to simplify the creation of levels for Metroidvania game sources at : [Metroidvania] (https://github.com/Ghirtor/Metroidvania "Metroidvania").
+this tool is developped to simplify the creation of levels for Metroidvania game sources at : <https://github.com/Ghirtor/Metroidvania>
 
-![Demo](demo.PNG)
+![](demo.PNG)
 
 ## Features
 
