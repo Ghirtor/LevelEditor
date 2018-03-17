@@ -2,9 +2,7 @@
 
 this tool is developped to simplify the creation of levels for Metroidvania game sources at : <https://github.com/Ghirtor/Metroidvania>
 
-<p align="center">
-  <img src="https://github.com/Ghirtor/LevelEditor/tree/master/screenshots/demo.PNG" width="350"/>
-</p>
+![demo](https://user-images.githubusercontent.com/36055053/37550685-d3b9aa6e-2991-11e8-95fe-bfb8181cafae.PNG)
 
 ## Features
 
