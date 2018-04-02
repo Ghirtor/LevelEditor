@@ -1,0 +1,6 @@
+.git/
+.idea/
+target/
+DB_GhirtorTool.properties
+DB_GhirtorTool.script
+LevelEditor.iml

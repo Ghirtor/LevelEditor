@@ -34,7 +34,7 @@ public class FileSelectorController {
     private Button cancel;
 
     @FXML
-    private Button open;
+    public Button open;
 
     @FXML
     private ListView list;
@@ -50,6 +50,7 @@ public class FileSelectorController {
 
     @FXML
     private void initialize() {
+        Main.fileSelectorController = this;
         String directory = System.getProperty("user.dir") + File.separator;
         f = new FileSelector();
         updateList(directory);
@@ -57,6 +58,12 @@ public class FileSelectorController {
         box.setValue(directory);
         enableBoxListener();
         list.setOnMouseClicked(e -> {
+            if (Main.getActive() instanceof SaveStage) {
+                String selection = (String) list.getSelectionModel().getSelectedItem();
+                if (selection != null && new File(((String) box.getValue()) + selection).isDirectory())
+                    open.setText("open");
+                else open.setText("save");
+            }
             if (e.getClickCount() == 2) openButtonEvent();
         });
     }
@@ -104,13 +111,18 @@ public class FileSelectorController {
             updateMenu(tmp);
             box.setValue(tmp);
             enableBoxListener();
+            if (Main.getActive() instanceof SaveStage) open.setText("save");
         }
-        else if (selection != null && !(new File(((String) box.getValue()) + selection).isDirectory())) {
+        else if (selection != null && !(new File(((String) box.getValue()) + selection).isDirectory()) && Main.getActive() instanceof OpenStage) {
             String[] split = selection.split("\\.");
             if (split[split.length-1].equals("html")) {
                 Main.sceneEditorController.parse(((String) box.getValue()) + selection);
                 Main.switchStage(Main.getMainStage());
             }
+        }
+        else if (Main.getActive() instanceof SaveStage) {
+            Main.sceneEditorController.htmlGenerator((String) box.getValue());
+            Main.switchStage(Main.getMainStage());
         }
     }
 }

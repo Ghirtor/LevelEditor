@@ -23,7 +23,35 @@ class OpenStage extends Stage {
         Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("/fxml/fileSelector.fxml"));
+            if (Main.fileSelectorController != null) Main.fileSelectorController.open.setText("open");
             setTitle("Open");
+            Scene scene = new Scene(root);
+            setScene(scene);
+            if (!Main.cssPath.equals("")) {
+                URL cssURL = getClass().getResource(Main.cssPath);
+                if (Main.cssURL != null) {
+                    scene.getStylesheets().add(cssURL.toExternalForm());
+                    Main.cssURL = cssURL;
+                }
+            }
+            this.setOnCloseRequest(closeEvent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+class SaveStage extends Stage {
+    private EventHandler<WindowEvent> closeEvent = (t) -> {
+        Main.switchStage(Main.getMainStage());
+    };
+
+    public SaveStage() {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/fxml/fileSelector.fxml"));
+            if (Main.fileSelectorController != null) Main.fileSelectorController.open.setText("save");
+            setTitle("Save");
             Scene scene = new Scene(root);
             setScene(scene);
             if (!Main.cssPath.equals("")) {
@@ -44,6 +72,7 @@ public class Main extends Application {
     public static Stage active;
     public static Stage mainStage;
     public static Controller sceneEditorController;
+    public static FileSelectorController fileSelectorController;
     public static String cssPath = "";
     public static URL cssURL = null;
     public static Database database;

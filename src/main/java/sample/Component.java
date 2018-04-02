@@ -77,7 +77,7 @@ class Tile extends Component {
         for (int i = 0; i < level; i++) html+="\t";
         html+="<div class=\"tile\">\n";
         for (int i = 0; i < level+1; i++) html+="\t";
-        html+="<span class=\"type\">"+"</span>\n";
+        html+="<span class=\"type\">"+getInfos().getSubtype()+"</span>\n";
         for (int i = 0; i < level+1; i++) html+="\t";
         html+="<span class=\"x\">"+Integer.toString((int) this.getX())+"</span>\n";
         for (int i = 0; i < level+1; i++) html+="\t";

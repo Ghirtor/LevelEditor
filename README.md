@@ -14,9 +14,13 @@ this tool is developped to simplify the creation of levels for Metroidvania game
 * export a level created with this tool to html format
 * possibility to choose tool style in menu **settings > style > [defaultStyle] or [darkStyle]**
 
+## Requirements
+
+* java 9
+
 ## Installation
 
-* maven install -Plinux,windows
+* mvn install -Plinux,windows
 * choose the package corresponding to your system
 
 ## Usage

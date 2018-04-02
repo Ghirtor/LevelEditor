@@ -94,12 +94,13 @@ public class Controller {
     private Component lastSelected; // last selected component
     double orgSceneX;
     double orgSceneY;
-    int sceneWidth = 100;
-    int sceneHeight = 100;
+    private final int default_scene_width = 100;
+    private final int default_scene_height = 100;
+    int sceneWidth = default_scene_width;
+    int sceneHeight = default_scene_height;
     private ArrayList<Line> borders;
     private int borderWidth = 10;
     private DropShadow selectionEffect; // effect applied on selected component
-    private String html_dir = File.separator+"src"+File.separator+"main"+File.separator+"resources"+File.separator+"html"+File.separator; // directory where to put generated html files
 
     private void updateList() {
         ArrayList<Infos> list = new ArrayList<Infos>();
@@ -130,6 +131,11 @@ public class Controller {
         else {
             Tile tmp = (Tile) (t.getSource());
             tmp.toFront();
+            int ind = tiles.indexOf(tmp);
+            for (int i = ind + 1; i < tiles.size(); i++) {
+                tiles.set(i-1, tiles.get(i));
+                tiles.set(i, tmp);
+            }
             for (Character c : characters)
                 c.toFront();
         }
@@ -315,7 +321,7 @@ public class Controller {
         exportHtml.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
-                htmlGenerator();
+                Main.switchStage(new SaveStage());
             }
         });
 
@@ -341,6 +347,10 @@ public class Controller {
                 status = CHARACTER;
                 updateList();
                 disableButtons();
+                minX.setText("");
+                maxX.setText("");
+                minY.setText("");
+                maxY.setText("");
             }
         });
 
@@ -350,6 +360,10 @@ public class Controller {
                 status = TILE;
                 updateList();
                 disableButtons();
+                minX.setText("");
+                maxX.setText("");
+                minY.setText("");
+                maxY.setText("");
             }
         });
 
@@ -359,6 +373,10 @@ public class Controller {
                 status = BACKGROUND;
                 updateList();
                 disableButtons();
+                minX.setText("");
+                maxX.setText("");
+                minY.setText("");
+                maxY.setText("");
             }
         });
 
@@ -625,12 +643,28 @@ public class Controller {
             disableDragAndDrop(r);
     }
 
+    private void reset() {
+        background.setSelected(true);
+        status = BACKGROUND;
+        drawArea.getChildren().clear();
+        characters.clear();
+        tiles.clear();
+        backgrounds.clear();
+        sceneWidth = default_scene_width;
+        sceneHeight = default_scene_height;
+        minX.setText("");
+        maxX.setText("");
+        minY.setText("");
+        maxY.setText("");
+        drawBorders();
+    }
+
     // generate an html file corresponding to the scene
-    private void htmlGenerator() {
+    public void htmlGenerator(String path) {
         int level = 2;
         try {
             String filename = title.getText().trim().equals("")?Long.toString(System.currentTimeMillis())+".html":title.getText()+".html";
-            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(System.getProperty("user.dir")+html_dir, filename)));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(new File(path, filename)));
             writer.write("<!DOCTYPE html>\n<html>\n");
             writer.write("\t<head>\n\t\t<title>" + filename.substring(0, filename.length()-5) + "</title>\n\t</head>\n\t<body>\n");
             writer.write("\t\t<div class=\"scene\">\n" +
@@ -652,6 +686,7 @@ public class Controller {
     // parse an html file using Jsoup
     public void parse(String toParse) {
         try {
+            reset();
             Document doc = Jsoup.parse(new File(toParse), "UTF-8", "");
             Element title = doc.select("title").first();
             this.title.setText(title.text());
@@ -690,18 +725,18 @@ public class Controller {
                 drawPicture(Integer.parseInt(charX.text()), Integer.parseInt(charY.text()), new Infos(Infos.TYPE_CHARACTER, Integer.parseInt(charZoom.text()), charName.text(), charPath.text(), Integer.parseInt(charSourceX.text()), Integer.parseInt(charSourceY.text()), Integer.parseInt(charSourceWidth.text()), Integer.parseInt(charSourceHeight.text())));
             }
             Elements tls = doc.select("div.tile");
-            for (Element e : tls) {
-                Element TileType = e.select("span.type").first();
-                Element TileX = e.select("span.x").first();
-                Element TileY = e.select("span.y").first();
-                Element TileSourceX = e.select("span.sourceX").first();
-                Element TileSourceY = e.select("span.sourceY").first();
-                Element TileSourceWidth = e.select("span.sourceWidth").first();
-                Element TileSourceHeight = e.select("span.sourceHeight").first();
-                Element TileZoom = e.select("span.zoom").first();
-                Element TilePath = e.select("span.path").first();
-                Element TileName = e.select("span.name").first();
-                drawPicture(Integer.parseInt(TileX.text()), Integer.parseInt(TileY.text()), new Infos(Infos.TYPE_TILE, Integer.parseInt(TileZoom.text()), TileName.text(), TilePath.text(), Integer.parseInt(TileSourceX.text()), Integer.parseInt(TileSourceY.text()), Integer.parseInt(TileSourceWidth.text()), Integer.parseInt(TileSourceHeight.text())));
+            for (int i = tls.size()-1; i >= 0; i--) {
+                Element TileType = tls.get(i).select("span.type").first();
+                Element TileX = tls.get(i).select("span.x").first();
+                Element TileY = tls.get(i).select("span.y").first();
+                Element TileSourceX = tls.get(i).select("span.sourceX").first();
+                Element TileSourceY = tls.get(i).select("span.sourceY").first();
+                Element TileSourceWidth = tls.get(i).select("span.sourceWidth").first();
+                Element TileSourceHeight = tls.get(i).select("span.sourceHeight").first();
+                Element TileZoom = tls.get(i).select("span.zoom").first();
+                Element TilePath = tls.get(i).select("span.path").first();
+                Element TileName = tls.get(i).select("span.name").first();
+                drawPicture(Integer.parseInt(TileX.text()), Integer.parseInt(TileY.text()), new Infos(TileType.text(), Integer.parseInt(TileZoom.text()), TileName.text(), TilePath.text(), Integer.parseInt(TileSourceX.text()), Integer.parseInt(TileSourceY.text()), Integer.parseInt(TileSourceWidth.text()), Integer.parseInt(TileSourceHeight.text())));
             }
             drawBorders();
         } catch (IOException e) {
