@@ -29,9 +29,9 @@ public class PictureInfos {
         pictures.put("tile15", new Infos(Infos.TYPE_TILE, Infos.ZOOM_TILE, "tile15", PictureInfos.picture_dir+"tiles1.png", 94, 190, 17, 17));
         pictures.put("tile16", new Infos(Infos.TYPE_TILE, Infos.ZOOM_TILE, "tile16", PictureInfos.picture_dir+"tiles1.png", 81, 254, 46, 18));
         pictures.put("tile17", new Infos(Infos.TYPE_TILE, Infos.ZOOM_TILE, "tile17", PictureInfos.picture_dir+"tiles1.png", 83, 240, 42, 45));
-        pictures.put("laser", new Infos(Infos.TYPE_LASER, Infos.ZOOM_LASER, "laser", PictureInfos.picture_dir+"laser.png", 1, 11, 14, 53));
+        pictures.put("laser", new Infos(Infos.TYPE_LASER, Infos.ZOOM_LASER, "laser", PictureInfos.picture_dir+"laser.png", 0, 11, 16, 53));
         pictures.put("decoration", new Infos(Infos.TYPE_DECORATION, Infos.ZOOM_DECORATION, "decoration", PictureInfos.picture_dir+"decoration.png", 1, 1, 14, 15));
-        pictures.put("endlevel", new Infos(Infos.TYPE_ENDLEVEL, Infos.ZOOM_ENDLEVEL, "endlevel", PictureInfos.picture_dir+"endlevel_turning_off.png", 80, 0, 16, 16));
+        pictures.put("endlevel", new Infos(Infos.TYPE_ENDLEVEL, Infos.ZOOM_ENDLEVEL, "endlevel", PictureInfos.picture_dir+"endlevel.png", 0, 0, 16, 16));
         for (int i = 1; i <= backgroundCount; i++)
             pictures.put(PictureInfos.picture_dir+"background"+i+".bmp", new Infos(Infos.TYPE_BACKGROUND, Infos.ZOOM_BACKGROUND, "background"+i, PictureInfos.picture_dir+"background"+i+".bmp"));
     }

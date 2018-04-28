@@ -460,8 +460,8 @@ public class Controller {
         backgrounds.clear();
         if (comboBox.getValue() != null && status == BACKGROUND) {
             Image image = new Image(this.getClass().getResourceAsStream(comboBox.getValue().getPath()));
-            for (int i = 0; i <= sceneWidth; i += comboBox.getValue().getZoom() * image.getWidth()) {
-                for (int j = 0; j <= sceneHeight; j += comboBox.getValue().getZoom() * image.getHeight()) {
+            for (int i = 0; i <= sceneWidth; i += comboBox.getValue().getZoom() * image.getWidth()-1) {
+                for (int j = 0; j <= sceneHeight; j += comboBox.getValue().getZoom() * image.getHeight()-1) {
                     drawPicture(i, j, comboBox.getValue());
                 }
             }

@@ -112,6 +112,10 @@ class Background extends Component {
         for (int i = 0; i < level; i++) html+="\t";
         html+="<div class=\"background\">\n";
         for (int i = 0; i < level+1; i++) html+="\t";
+        html+="<span class=\"width\">"+Integer.toString((int) getFitWidth())+"</span>\n";
+        for (int i = 0; i < level+1; i++) html+="\t";
+        html+="<span class=\"height\">"+Integer.toString((int) getFitHeight())+"</span>\n";
+        for (int i = 0; i < level+1; i++) html+="\t";
         html+="<span class=\"zoom\">"+Integer.toString(getInfos().getZoom())+"</span>\n";
         for (int i = 0; i < level+1; i++) html+="\t";
         html+="<span class=\"path\">"+getInfos().getPath()+"</span>\n";
